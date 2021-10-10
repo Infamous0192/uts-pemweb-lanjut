@@ -50,11 +50,21 @@ class Unit extends BaseController
   {
     $unit = new UnitModel();
 
-    $unit->save([
+    $data = [
       'nama_unitkerja' => $this->request->getPost('nama_unitkerja')
-    ]);
+    ];
 
-    return redirect()->to('/unit');
+    $is_valid = \Config\Services::validation()->run($data, 'unit');
+
+    if ($is_valid) {
+      $unit->save($data);
+      return redirect()->to('/unit');
+    } else {
+      session()->setFlashData('error', \Config\Services::validation()->getErrors());
+      session()->setFlashData('input', $data);
+
+      return redirect()->to('/unit/tambah');
+    }
   }
 
   public function delete($id_unitkerja)

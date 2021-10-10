@@ -40,4 +40,13 @@ class Validation
     //--------------------------------------------------------------------
     // Rules
     //--------------------------------------------------------------------
+    public $unit = [
+        'nama_unitkerja' => 'required|max_length[12]'
+    ];
+    public $unit_errors = [
+        'nama_unitkerja' => [
+            'required' => 'Ga ada isinya bang',
+            'max_length' => 'R U KIDDING ME!'
+        ]
+    ];
 }

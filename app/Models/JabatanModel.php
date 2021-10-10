@@ -6,10 +6,10 @@ use CodeIgniter\Model;
 
 class JabatanModel extends Model
 {
-  protected $table      = 'jabatana';
+  protected $table      = 'jabatan';
   protected $primaryKey = 'id_jabatan';
 
-  protected $allowedFields = ['nama_jabatan'];
+  protected $allowedFields = ['nama_jabatan', 'id_unitkerja'];
 
   public function getJabatan()
   {

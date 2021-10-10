@@ -7,8 +7,8 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-        <a class="nav-link" href="#">Pegawai</a>
-        <a class="nav-link" href="#">Jabatan</a>
+        <a class="nav-link" href="<?= base_url('/pegawai') ?>">Pegawai</a>
+        <a class="nav-link" href="<?= base_url('/jabatan') ?>">Jabatan</a>
         <a class="nav-link" href="<?= base_url('/unit') ?>">Unit Kerja</a>
       </div>
     </div>

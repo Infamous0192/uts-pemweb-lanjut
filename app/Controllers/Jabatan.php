@@ -9,61 +9,63 @@ class Jabatan extends BaseController
 {
   public function index()
   {
-    $unit = new JabatanModel();
+    $jabatan = new JabatanModel();
 
-    $data['jabatan'] = $unit->getJabatan();
+    $data['jabatan'] = $jabatan->getJabatan();
 
     return view('jabatan', $data);
   }
 
   public function tambah()
   {
-    return view('tambah_unit');
-  }
-
-  public function ubah($id_unitkerja)
-  {
     $unit = new UnitModel();
 
-    $data['unit'] = $unit->find($id_unitkerja);
+    $data['unit'] = $unit->findAll();
 
-    if (!$data['unit']) return redirect()->to('/unit');
-
-    return view('edit_unit', $data);
+    return view('tambah_jabatan', $data);
   }
 
-  public function edit($id_unitkerja)
+  public function ubah($id_jabatan)
   {
+    $jabatan = new JabatanModel();
     $unit = new UnitModel();
 
-    $unit_kerja = $unit->find($id_unitkerja);
+    $data['jabatan'] = $jabatan->find($id_jabatan);
+    $data['unit'] = $unit->findAll();
 
-    if (!$unit_kerja) return redirect()->to('/unit');
+    return view('edit_jabatan', $data);
+  }
 
-    $unit->update($id_unitkerja, [
-      'nama_unitkerja' => $this->request->getPost('nama_unitkerja')
+  public function edit($id_jabatan)
+  {
+    $jabatanModel = new JabatanModel();
+
+    $jabatanModel->update($id_jabatan, [
+      'nama_jabatan' => $this->request->getPost('nama_jabatan'),
+      'id_unitkerja' => $this->request->getPost('id_unitkerja')
     ]);
 
-    return redirect()->to('/unit');
+    return redirect()->to('/jabatan');
   }
 
   public function create()
   {
-    $unit = new UnitModel();
+    $jabatan = new JabatanModel();
 
-    $unit->save([
-      'nama_unitkerja' => $this->request->getPost('nama_unitkerja')
+    $jabatan->save([
+      'nama_jabatan' => $this->request->getPost('nama_jabatan'),
+      'id_unitkerja' => $this->request->getPost('id_unitkerja')
     ]);
 
-    return redirect()->to('/unit');
+    return redirect()->to('/jabatan');
   }
 
-  public function delete($id_unitkerja)
+  public function delete($id_jabatan)
   {
-    $unit = new UnitModel();
+    $jabatan = new JabatanModel();
 
-    $unit->delete($id_unitkerja);
+    $jabatan->delete($id_jabatan);
 
-    return redirect()->to('/unit');
+    return redirect()->to('/jabatan');
   }
 }
